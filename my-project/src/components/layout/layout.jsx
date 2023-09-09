@@ -5,12 +5,15 @@ import {Header} from './Header'
  const Layout = ({ children }) => {
   return (
   <Flex >
-        <Box height='xl' bg='white' width='xs'> 
+        <Box 
+        height='xl' 
+        width='xs'> 
             <Sidebar />
         </Box>
         <Box flex="1" bg='gray.100'> 
             <Header />
-            <Flex bg='green'>{children}</Flex>
+            <Flex px='6' mt='4'>
+                {children}</Flex>
         </Box>
   </Flex>
   )
