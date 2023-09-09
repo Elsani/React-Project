@@ -1,17 +1,17 @@
-import { Box, Flex } from '@chakra-ui/react'
+import { Box, Flex, Heading, Text } from '@chakra-ui/react'
 import { Sidebar } from './Sidebar'
+import {Header} from './Header'
 
- const Layout = ({children}) => {
+ const Layout = ({ children }) => {
   return (
   <Flex >
         <Box height='xl' bg='white' width='xs'> 
             <Sidebar />
         </Box>
         <Box flex="1" bg='gray.100'> 
-            <Flex bg='orange'>Header</Flex>
+            <Header />
             <Flex bg='green'>{children}</Flex>
         </Box>
-        <Box>  Sidebar</Box>
   </Flex>
   )
 }

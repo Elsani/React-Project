@@ -3,11 +3,25 @@ import {Flex, Text, Box } from '@chakra-ui/react'
 
 export const Sidebar = () => {
     return (
-     <Box  mx='5' mt='20'>
+     <Box  
+        mt='20' 
+        border='1px' 
+        borderColor='gray.200' 
+        rounded='md'
+        >
+
         {sidebarItems.map(item => {
             return (
-                <Flex key={item.name} p='4' border='2px' rounded='md' my='2'>
-                    {item.icon} <Text> {item.name}</Text>
+                <Flex key={item.name}
+                gap='4'
+                 p='4'
+                 rounded='md'
+                 my='2'         
+                 _hover={{
+                    background: 'gray.100',
+                    color: 'teal.500',
+                }}>
+                    {item.icon} <Text fontSize='lg'> {item.name}</Text>
                 </Flex>     
             )
         })}
