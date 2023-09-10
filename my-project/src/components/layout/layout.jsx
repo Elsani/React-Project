@@ -7,13 +7,16 @@ import {Header} from './Header'
   <Flex >
         <Box 
         height='xl' 
-        width='xs'> 
+        width='xs'
+        > 
             <Sidebar />
         </Box>
         <Box flex="1" bg='gray.100'> 
             <Header />
             <Flex px='6' mt='4'>
-                {children}</Flex>
+
+                {children}
+            </Flex>
         </Box>
   </Flex>
   )

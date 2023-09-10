@@ -6,8 +6,7 @@ export const Sidebar = () => {
     return (
      <Box  
         mt='20' 
-        borderColor='gray.200' 
-        rounded='md'>
+        borderRight='1px' borderRightColor='gray.600'>
         {sidebarItems.map(item => {
             <Link to={item.path}>
                 <Flex 
