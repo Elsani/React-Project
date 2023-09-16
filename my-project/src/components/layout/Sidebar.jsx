@@ -4,16 +4,13 @@ import { Link } from 'react-router-dom'
 
 export const Sidebar = () => {
     return (
-     <Box  
-        mt='20' 
-        borderRight='1px' borderRightColor='gray.600'>
+     <Box mt='20'>
         {sidebarItems.map(item => {
-            <Link to={item.path}>
+            <Link to={item.path} key={item.path}>
                 <Flex 
                 key={item.name}
                 gap='4'
                 p='4'
-                rounded='md'
                 my='2'         
                 _hover={{
                    background: 'gray.100',

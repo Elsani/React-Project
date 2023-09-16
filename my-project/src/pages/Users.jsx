@@ -2,13 +2,25 @@ import { UsersFooter,} from "../components/pageComponents/users/UsersFooter"
 import { UsersHeader,} from "../components/pageComponents/users/UsersHeader"
 import { UsersTable,} from "../components/pageComponents/users/UsersTable"
 
-import {Box} from '@chakra-ui/react'
+import {Box, Heading, Spinner } from '@chakra-ui/react'
+import {useFetch} from '../hooks/useFetch'
+import {useState} from 'react'
+import {useDebounce} from '../hooks/useDebounce'
 
-const baseUrl = import.meta.env.BASEURL
 
 export const Users = () => {
+      const [pagination, setPagination] = useState(1)
+      const [search, setSearch] = useState('')
+      const debouncedSearch = useDebounce(search, 500)
+      const { data, isLoading, error } = useFetch (`users/search?q=${debouncedSearch.trim().toLowercase()}`)
 
-      console.log(baseUrl)
+      const handleSearch = searchInput => setSearch(searchInput)
+      
+      //to do  pagination
+      //const handleBackwards =
+
+      if(isLoading) return <Spinner />
+      if(error) return <heading>{error}</heading>
 
       return <Box width='full'>
                   <UsersHeader />
