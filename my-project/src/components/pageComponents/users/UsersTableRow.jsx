@@ -7,18 +7,19 @@ import {
   MenuItem,
   Button,
   Flex,
-
  } from '@chakra-ui/react'
-
- import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
+ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 
 export const UsersTableRow = ({
     id,
     firstName,
     lastName,
     department,
-}) => {
+    KeyboardArrowDowIcon,
+    onOpen,
+    onOpenDelete,
+    handleRowClick,
+  }) => {
   return (
   <Tr>
   <Td>{id}</Td>
@@ -28,16 +29,25 @@ export const UsersTableRow = ({
   <Td > 
     <Flex float='right'>
     <Menu>
-      <MenuButton 
-      as={Button} 
-      rightIcon={<ExpandMoreIcon />}
-      bg='0'
-      rounded='full'
-      >
+      <MenuButton as={Button} bg='0' rounded='full'>
+        <KeyboardArrowDownIcon />
       </MenuButton>
       <MenuList>
-        <MenuItem>Download</MenuItem>
-        <MenuItem>Create a Copy</MenuItem>
+        <MenuItem onClick={() => {
+          onOpen()
+          handleRowClick(id)
+          }}
+          >
+            Edit 
+            </MenuItem>
+        <MenuItem 
+        onClick={() => { 
+        onOpenDelete()
+        handleRowClick(id)
+        }}
+        >
+          Delete 
+          </MenuItem>
       </MenuList>
     </Menu>
     </Flex>

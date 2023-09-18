@@ -1,5 +1,5 @@
+import {useState, Fragment } from 'react'
 import { 
-  Td,
   Tr,
   Thead,
   TableContainer,
@@ -7,24 +7,32 @@ import {
   Table,
   Tbody,
   Spinner,
+  Heading,
+  useDisclosure,
  } from '@chakra-ui/react'
 
 import { UsersTableRow } from './UsersTableRow'
+import { EditUserModal } from './EditUserModal'
 import { useFetch } from '../../../hooks/useFetch'
 
 export const UsersTable = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [userId, setUserId] = useState('')
   const { data, isLoading, error } = useFetch('users')
 
 
-  const handleRowClick = (id) => {
-    console.log(id)
+  const handleEditClick = (id) => {
+      setUserId(id)
+    console.log(userId)
   }
 
   if(isLoading) return <Spinner />
   if(error) return <Heading>{error}</Heading>
   
   return (
-  <TableContainer 
+
+    <Fragment>
+       <TableContainer 
   bg='white' 
   mt='6' 
   rounded='md' 
@@ -44,7 +52,7 @@ export const UsersTable = () => {
 
   }}
   >
-  <Table variant='simple'>
+  <Table variant='simple' size='sm'>
     <Thead>
       <Tr>
         <Th>id</Th>
@@ -69,6 +77,9 @@ export const UsersTable = () => {
         </Tbody>
         </Table>
       </TableContainer>
+      {isOpen && <EditUserModal isOpen={isOpen} onClose={onclose} userId={userId} />}
+    </Fragment>
+ 
 
   )
 }
