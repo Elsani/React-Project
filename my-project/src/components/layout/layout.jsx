@@ -4,10 +4,12 @@ import { Header } from './Header'
 
  const Layout = ({ children }) => {
   return (
-  <Flex height="100%">
+  <Flex height="100vh">
         <Box 
         height='lg' 
         width='60'
+        borderRight='gray '
+        border='10px'
         > 
             <Sidebar />
         </Box>

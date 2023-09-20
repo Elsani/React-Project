@@ -6,31 +6,35 @@ import {
   Th,
   Table,
   Tbody,
-  Spinner,
-  Heading,
   useDisclosure,
+  Heading,
  } from '@chakra-ui/react'
 
 import { UsersTableRow } from './UsersTableRow'
 import { EditUserModal } from './EditUserModal'
-import { useFetch } from '../../../hooks/useFetch'
+import { DeleteUserModal } from './DeleteUsersModal'
 
-export const UsersTable = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+export const UsersTable = ({ data }) => {
+  const {
+    isOpen: isOpenEdit,
+    onOpen:onOpenEdit,
+    onClose:onCloseEdit,
+  } = useDisclosure()
+  const { 
+    isOpen:isOpenDelete, 
+    onOpen:onOpenDelete, 
+    onClose:onCloseDelete,
+   } = useDisclosure()
   const [userId, setUserId] = useState('')
-  const { data, isLoading, error } = useFetch('users')
-
-
-  const handleEditClick = (id) => {
-      setUserId(id)
-    console.log(userId)
+  
+  
+  const handleEditClick = id => {
+    setUserId(id)
   }
 
-  if(isLoading) return <Spinner />
-  if(error) return <Heading>{error}</Heading>
-  
-  return (
+  if(data.users.length == 0 ) return <Heading>No users found</Heading>
 
+  return (
     <Fragment>
        <TableContainer 
   bg='white' 
@@ -71,15 +75,29 @@ export const UsersTable = () => {
           firstName={user.firstName}
           lastName={user.lastName}
           department={user.company.department}
+          handleRowClick={handleEditClick}
+          onOpen={onOpenEdit}
+          onOpenDelete={onOpenDelete}
           />
         )
       })}
         </Tbody>
         </Table>
       </TableContainer>
-      {isOpen && <EditUserModal isOpen={isOpen} onClose={onclose} userId={userId} />}
+      {isOpenEdit &&  (
+      <EditUserModal
+        isOpen={isOpenEdit}
+        onClose={onCloseEdit}
+        userId={userId}
+         />
+        )}
+        { isOpenDelete && ( 
+        <DeleteUserModal
+        isOpen={isOpenDelete}
+        onClose={onCloseDelete}
+        userId={userId}  
+        />
+       )}
     </Fragment>
- 
-
   )
 }
